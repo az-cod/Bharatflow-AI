@@ -98,7 +98,7 @@ When an anomaly is flagged, the agent dynamically interrogates external sensory 
 - `get_compliance_status`: E-way bill validity, GSTIN compliance, and verification checkpoints.
 
 ### 3. Concurrency-Engineered Benchmark Lab
-Includes a standardized evaluation harness ([`evaluation.py`](./evaluation.py)) validating agent accuracy against hidden ground-truth causes. Powered by a multi-threaded `ThreadPoolExecutor(max_workers=3)`, it achieves 100% Top-1 Attribution Accuracy in ~12 seconds without triggering API rate limits.
+Includes a standardized evaluation harness ([`evaluation.py`](./evaluation.py)) validating agent accuracy against hidden ground-truth causes. Powered by a multi-threaded `ThreadPoolExecutor(max_workers=3)`, it achieves 100% Top-1 Attribution Accuracy in approx 12 seconds without triggering API rate limits.
 
 ### 4. Zero-Emoji Enterprise DHL Design System
 The frontend ([`web/`](./web)) implements a professional design system adhering to the 60-30-10 Rule:

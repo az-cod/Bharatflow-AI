@@ -57,6 +57,13 @@ Declared value: ₹{ship.declared_value_inr:,.0f}
 """
 
 
+TOOL_TO_EVIDENCE_KEY = {
+    "get_weather": "weather",
+    "get_compliance_status": "compliance",
+    "get_hub_congestion": "congestion",
+}
+
+
 def _dispatch_tool(name: str, ship, mode: str) -> dict:
     if name == "get_weather":
         return get_weather_live(ship.current_hub) if mode == "live" else get_weather_simulated(ship)
@@ -147,7 +154,10 @@ def run_investigation(ship, detection_report, mode: str = "live") -> dict:
                     continue
                 tool_trace.append(fn_name)
                 result = _dispatch_tool(fn_name, ship, mode)
-                evidence[fn_name.replace("get_", "").replace("_status", "")] = result
+                evidence_key = TOOL_TO_EVIDENCE_KEY.get(
+                    fn_name, fn_name.replace("get_", "").replace("_status", "")
+                )
+                evidence[evidence_key] = result
                 messages.append({
                     "role": "tool", "tool_call_id": tc.id,
                     "content": json.dumps(result),
